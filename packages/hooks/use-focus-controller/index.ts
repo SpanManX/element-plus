@@ -9,8 +9,7 @@ import {
 import { useEventListener } from '@vueuse/core'
 import { isElement, isFocusable, isFunction } from '@element-plus/utils'
 
-import type { ShallowRef } from 'vue'
-import type { MaybeRef } from '@vueuse/core'
+import type { MaybeRef, ShallowRef } from 'vue'
 
 interface UseFocusControllerOptions {
   disabled?: MaybeRef<boolean>
@@ -93,7 +92,7 @@ export function useFocusController<T extends { focus: () => void }>(
   useEventListener(wrapperRef, 'click', handleClick, true)
 
   // only for test
-  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
+  if (process.env.NODE_ENV === 'test') {
     onMounted(() => {
       const targetEl = isElement(target.value)
         ? target.value
